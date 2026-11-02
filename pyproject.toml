@@ -7,7 +7,9 @@ authors = [
     { name = "Mateusz Zajac", email = "144244766+ZajacMateusz1@users.noreply.github.com" }
 ]
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "nltk>=3.10.4",
+]
 
 [project.scripts]
 search-engine = "search_engine:main"
