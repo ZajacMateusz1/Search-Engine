@@ -15,10 +15,13 @@ def main() -> None:
                 inverted_index[key] = [value]
             else:
                 inverted_index[key].append(value)
-    print(inverted_index)
-    doc_ids = search(inverted_index)
-    result = [documents[doc_id]["file"] for doc_id in doc_ids]
-    print(result)
+    search_result = search(inverted_index)
+    if search_result is None:
+        print("Could not find any documents matching your query.")
+    else:
+        results = [documents[doc_id] for doc_id in search_result]
+        for result in results:
+            print(f"{result['file']}: {result['content']}")
 
 
 if __name__ == "__main__":

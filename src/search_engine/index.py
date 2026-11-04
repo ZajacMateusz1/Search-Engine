@@ -1,6 +1,3 @@
-import uuid
-
-
 def build_index(
     tokens: list[tuple[int, str]], doc_id: str
 ) -> dict[str, tuple[str, list[int]]]:
