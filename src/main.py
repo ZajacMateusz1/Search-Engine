@@ -9,14 +9,8 @@ def main() -> None:
         id, content = add_document(f"./data/{file}")
         documents[id] = {"file": file, "content": content}
         words = tokenize(content)
-        index = build_index(words, id)
-        for key, value in index.items():
-            doc_id, positions = value
-            if key not in inverted_index:
-                inverted_index[key] = {doc_id: positions}
-            else:
-                inverted_index[key][doc_id] = positions
-    search_result = search("python backend ai", inverted_index, and_mode=True)
+        inverted_index.update(build_index(words, id))
+    search_result = search("python backend ai", inverted_index, and_mode=False)
     if search_result is None:
         print("Could not find any documents matching your query.")
     else:
