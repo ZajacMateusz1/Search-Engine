@@ -11,4 +11,6 @@ def search(
                 results = set(inverted_index[term].keys())
             else:
                 results.intersection_update(inverted_index[term].keys())
+        elif and_mode and term not in inverted_index:
+            return None
     return list(results) if results else None
