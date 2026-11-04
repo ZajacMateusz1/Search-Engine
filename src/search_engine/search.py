@@ -1,5 +1,14 @@
-def search(inverted_index: dict[str, tuple[str, list[int]]]) -> list[str] | None:
-    query = input("Provide you input: ").lower()
-    if query not in inverted_index:
-        return
-    return [doc_id for doc_id, positions in inverted_index[query]]
+def search(
+    query: str, inverted_index: dict[str, dict[str, list[int]]], and_mode: bool = True
+) -> list[str] | None:
+    query_terms = query.split()
+    results = set()
+    for term in query_terms:
+        if not and_mode and term in inverted_index:
+            results.update(inverted_index[term].keys())
+        elif and_mode and term in inverted_index:
+            if not results:
+                results = set(inverted_index[term].keys())
+            else:
+                results.intersection_update(inverted_index[term].keys())
+    return list(results) if results else None

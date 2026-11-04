@@ -16,14 +16,13 @@ def main() -> None:
                 inverted_index[key] = {doc_id: positions}
             else:
                 inverted_index[key][doc_id] = positions
-    print(inverted_index)
-    # search_result = search(inverted_index)
-    # if search_result is None:
-    #     print("Could not find any documents matching your query.")
-    # else:
-    #     results = [documents[doc_id] for doc_id in search_result]
-    #     for result in results:
-    #         print(f"{result['file']}: {result['content']}")
+    search_result = search("python backend ai", inverted_index, and_mode=True)
+    if search_result is None:
+        print("Could not find any documents matching your query.")
+    else:
+        results = [documents[doc_id] for doc_id in search_result]
+        for result in results:
+            print(f"{result['file']}: {result['content']}")
 
 
 if __name__ == "__main__":
