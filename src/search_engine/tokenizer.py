@@ -10,3 +10,10 @@ def tokenize(text: str) -> list[str]:
         for i, word in enumerate(re.split(r"\W+", text))
         if word and word not in STOP_WORDS
     ]
+
+
+def tokenize_search(text: str) -> list[str]:
+    text = text.lower()
+    return [
+        (word) for word in re.split(r"\W+", text) if word and word not in STOP_WORDS
+    ]

@@ -1,7 +1,10 @@
+from search_engine.tokenizer import tokenize_search
+
+
 def search(
     query: str, inverted_index: dict[str, dict[str, list[int]]], and_mode: bool = True
 ) -> list[str] | None:
-    query_terms = query.split()
+    query_terms = tokenize_search(query)
     results = set()
     for term in query_terms:
         if not and_mode and term in inverted_index:
