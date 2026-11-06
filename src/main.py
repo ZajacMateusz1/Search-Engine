@@ -1,4 +1,4 @@
-from search_engine import add_document, tokenize, build_index, search
+from search_engine import add_document, tokenize, build_index, search, ranking
 
 documents: dict[str, dict[str, str]] = {}
 inverted_index: dict[str, dict[str, list[int]]] = {}
@@ -9,14 +9,17 @@ def main() -> None:
         id, content = add_document(f"./data/{file}")
         documents[id] = {"file": file, "content": content}
         words = tokenize(content)
-        inverted_index.update(build_index(words, id))
-    search_result = search("python backend ai", inverted_index, and_mode=False)
+        new_index = build_index(words, id)
+        for key, value in new_index.items():
+            if key not in inverted_index:
+                inverted_index[key] = value
+            else:
+                inverted_index[key].update(value)
+    search_result = search("programming", inverted_index, and_mode=False)
+    print(inverted_index)
     if search_result is None:
         print("Could not find any documents matching your query.")
-    else:
-        results = [documents[doc_id] for doc_id in search_result]
-        for result in results:
-            print(f"{result['file']}: {result['content']}")
+    ranking(search_result, inverted_index, documents)
 
 
 if __name__ == "__main__":
