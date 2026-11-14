@@ -1,0 +1,11 @@
+import uuid
+
+
+def add_document(path: str) -> tuple[str, str] | None:
+    try:
+        with open(path) as f:
+            content = f.read()
+            return (str(uuid.uuid4()), content)
+    except FileNotFoundError:
+        print("Cannot find the file at the specified path.")
+        return None
