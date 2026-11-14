@@ -1,5 +1,8 @@
+from search_engine import serach_tokenizer
+
+
 def main():
-    pass
+    print(serach_tokenizer("Hello word !"))
 
 
 if __name__ == "__main__":
