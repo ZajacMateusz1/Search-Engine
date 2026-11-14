@@ -1,0 +1,9 @@
+Python Basics
+
+Python is a general-purpose programming language known for readable syntax.
+Programs are built from variables, functions, classes, and modules.
+Lists store ordered collections, while dictionaries store key-value pairs.
+Loops repeat work, and conditional statements choose between different paths.
+Functions help organize reusable logic and make programs easier to test.
+Python is commonly used for web development, automation, data analysis, and
+machine learning.

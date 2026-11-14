@@ -1,0 +1,9 @@
+Information Retrieval
+
+Information retrieval is the process of finding useful information in a
+collection of documents. A search engine usually normalizes text, splits it
+into terms, and builds an index that maps terms to documents.
+When a user submits a query, the engine looks up matching terms and ranks the
+results. Ranking can consider term frequency, document frequency, and how
+closely the query terms occur together.
+Good search results should be relevant, fast to retrieve, and easy to inspect.
