@@ -1,18 +1,27 @@
-from search_engine import serach_tokenizer, add_document
+from search_engine import (
+    document_tokenizer,
+    search_tokenizer,
+    add_document,
+    add_to_index,
+)
 
 documents: dict[str, str] = {}
+inverse_index: dict[str, dict[str, list[int]]] = {}
 
 
 def main():
-    print(serach_tokenizer("Hello word !"))
     for path in [
         "./src/data/information_retrieval.txt",
         "./src/data/python_basics.txt",
     ]:
         document = add_document(path)
-        if document:
-            documents[document[0]] = document[1]
-    print(documents)
+        if not document:
+            continue
+        id, content = document
+        documents[id] = content
+        tokens = document_tokenizer(content)
+        add_to_index(inverse_index, tokens, id)
+    print(inverse_index)
 
 
 if __name__ == "__main__":
