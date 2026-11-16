@@ -20,6 +20,7 @@ def main():
         id, content = document
         documents[id] = content
         tokens = document_tokenizer(content)
+
         add_to_index(inverse_index, tokens, id)
     result = search("Python is great!", inverse_index, documents)
     for document, score in result:
