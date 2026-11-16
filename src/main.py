@@ -3,6 +3,7 @@ from search_engine import (
     search_tokenizer,
     add_document,
     add_to_index,
+    search,
 )
 
 documents: dict[str, str] = {}
@@ -21,7 +22,7 @@ def main():
         documents[id] = content
         tokens = document_tokenizer(content)
         add_to_index(inverse_index, tokens, id)
-    print(inverse_index)
+    search("Python is great!", inverse_index, documents)
 
 
 if __name__ == "__main__":
