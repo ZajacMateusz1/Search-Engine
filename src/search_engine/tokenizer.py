@@ -1,5 +1,9 @@
 import re
-from search_engine.stop_words import STOP_WORDS
+import nltk
+from nltk.corpus import stopwords
+
+nltk.download("stopwords")
+STOP_WORDS = set(stopwords.words("english"))
 
 
 def document_tokenizer(text: str) -> list[tuple[int, str]]:
