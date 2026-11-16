@@ -1,6 +1,5 @@
 from search_engine import (
     document_tokenizer,
-    search_tokenizer,
     add_document,
     add_to_index,
     search,
@@ -22,7 +21,9 @@ def main():
         documents[id] = content
         tokens = document_tokenizer(content)
         add_to_index(inverse_index, tokens, id)
-    search("Python is great!", inverse_index, documents)
+    result = search("Python is great!", inverse_index, documents)
+    for document, score in result:
+        print(f"{document}: {documents[document]} (score: {score}) \n")
 
 
 if __name__ == "__main__":

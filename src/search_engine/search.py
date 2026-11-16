@@ -9,23 +9,23 @@ def search(
 ):
     result: dict[str, int] = {}
     query_tokens = search_tokenizer(query)
+    all_tokens = len(query_tokens)
     for token in query_tokens:
         for document in documents.keys():
-            print(calculate_tf(document, token, inverse_index, documents))
-            print(calculate_idf(documents, token, inverse_index))
-            print(" ")
-    return result
+            tf = calculate_tf(document, token, inverse_index, all_tokens)
+            idf = calculate_idf(documents, token, inverse_index)
+            result[document] = result.get(document, 0) + (tf * idf)
+    return sorted(result.items(), key=lambda x: x[1], reverse=True)
 
 
 def calculate_tf(
     doc_id: str,
     token: str,
     inverse_index: dict[str, dict[str, list[int]]],
-    documents: dict[str, str],
+    all_tokens: int,
 ):
     token_count = len(inverse_index.get(token, {}).get(doc_id, []))
-    document_length = len(documents.get(doc_id, ""))
-    return token_count / document_length if document_length > 0 else 0
+    return token_count / all_tokens
 
 
 def calculate_idf(
